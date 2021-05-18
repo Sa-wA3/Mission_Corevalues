@@ -4,21 +4,38 @@ import java.util.Calendar;
 
 class MissionCorevalues {
 
-    static void test(int time) {
+    //文字を画面表示する際にタイムラグを持たせる
+    static void pauseTime(int time) {
         try {
             Thread.sleep(time);
         } catch (InterruptedException e) {
             System.out.println(e);
         }
-    } 
+    }
+
+    public static int checkInput() {
+        int num = 0;
+        do {
+            try {
+                System.out.print("参加人数を教えてください：");
+                String str = new Scanner(System.in).nextLine();
+                num = Integer.parseInt(str);
+            } catch (NumberFormatException e) {
+                System.out.println("Error：数値で入力してください");
+            }
+        } while (num <= 0);
+        return num;
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Random rand = new Random();
         Calendar cal = Calendar.getInstance();
 
-        int date = cal.get(Calendar.DATE); 
-        String[] corevalues = {"個の力", "仲間との和", "組織の心"}; 
-        System.out.print("参加人数を教えてください："); int memberNum = sc.nextInt();
+        int date = cal.get(Calendar.DATE);
+        String[] corevalues = {"個の力", "仲間との和", "組織の心"};
+        int memberNum = 0;
+        memberNum = checkInput();
         String[] members = new String[memberNum];
 
         //membersに格納→並び替え
@@ -27,14 +44,14 @@ class MissionCorevalues {
             members[i] = sc.next();
         }
         for (int i = 0; i < members.length; i++) {
-            int r =rand.nextInt(memberNum);
+            int r = rand.nextInt(memberNum);
             String tmp = members[i];
             members[i] = members[r];
             members[r] = tmp;
         }
         //ここまで
 
-        test(500);
+        pauseTime(500);
 
         System.out.println("感謝の朝礼を始めます。"); //あいさつ
 
@@ -47,8 +64,8 @@ class MissionCorevalues {
         //以下、どこの部分をフルセンテンスで読み上げるのかを表示する処理
         switch (date % 3) {
             case 0:
-                System.out.println("本日は「" + date + "日」なので、「" + corevalues[date % 3] + "」の部分をフルセンテンスで読んでいきましょう！");     
-                break;  
+                System.out.println("本日は「" + date + "日」なので、「" + corevalues[date % 3] + "」の部分をフルセンテンスで読んでいきましょう！");
+                break;
             case 1:
                 System.out.println("本日は「" + date + "日」なので、「" + corevalues[date % 3] + "」の部分をフルセンテンスで読んでいきましょう！");
                 break;
@@ -58,24 +75,24 @@ class MissionCorevalues {
         }
         //ここまで
 
-        test(500);
+        pauseTime(500);
 
         //以下、発表までの待ち時間っぽい処理
         System.out.println("順番を発表します！");
         for (int i = 1; i <= memberNum; i++) {
-            test(500);
+            pauseTime(500);
             if (i != memberNum) {
-                System.out.print("# ");    
-            }else {
+                System.out.print("# ");
+            } else {
                 System.out.println("#");
             }
-            
+
         }
         //ここまで
 
         //以下、読み上げる順番を表示する処理
         for (int i = 0; i < memberNum; i++) {
-            test(250);
+            pauseTime(250);
             System.out.println((i + 1) + "番目：" + members[i] + "さん");
         }
         //ここまで
