@@ -1,9 +1,7 @@
 import java.util.Scanner;
 import java.util.Random;
-import java.util.Calendar;
 
-class MissionCorevalues {
-
+public class MissionCorevalues {
     static void test(int time) {
         try {
             Thread.sleep(time);
@@ -14,10 +12,7 @@ class MissionCorevalues {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Random rand = new Random();
-        Calendar cal = Calendar.getInstance();
 
-        int date = cal.get(Calendar.DATE); 
-        String[] corevalues = {"個の力", "仲間との和", "組織の心"}; 
         System.out.print("参加人数を教えてください："); int memberNum = sc.nextInt();
         String[] members = new String[memberNum];
 
@@ -44,19 +39,10 @@ class MissionCorevalues {
             System.out.println(e);
         }
 
-        //以下、どこの部分をフルセンテンスで読み上げるのかを表示する処理
-        switch (date % 3) {
-            case 0:
-                System.out.println("本日は「" + date + "日」なので、「" + corevalues[date % 3] + "」の部分をフルセンテンスで読んでいきましょう！");     
-                break;  
-            case 1:
-                System.out.println("本日は「" + date + "日」なので、「" + corevalues[date % 3] + "」の部分をフルセンテンスで読んでいきましょう！");
-                break;
-            case 2:
-                System.out.println("本日は「" + date + "日」なので、「" + corevalues[date % 3] + "」の部分をフルセンテンスで読んでいきましょう！");
-                break;
-        }
-        //ここまで
+        // output Output the part of the reading
+        Date date = new Date(); // call outputRole Method from Date Class
+        date.outputRole();
+        // end
 
         test(500);
 
